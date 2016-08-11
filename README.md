@@ -87,7 +87,7 @@ from .models import Association
 from .models import User
 from . import views
 from .views import CustomerListing, CustomerDetail, CustomerCreate, CustomerUpdate
-from .views import StaffListing, StaffDetail, StaffUpdate, StaffCreate
+from .views import StaffListing, StaffDetail, StaffUpdate, StaffCreate, StaffDelete
 from .views import UserListing, UserDetail, UserUpdate, UserCreate
 from .views import AssociationListing, AssociationDetail, AssociationUpdate, AssociationCreate
 app_name = 'lipsy'
@@ -112,7 +112,8 @@ urlpatterns = [
     url(r'^customer/(?P<pk>\w+)/update/$', CustomerUpdate.as_view(), name='update'),
     url(r'^association/(?P<pk>\d+)/update/$', AssociationUpdate.as_view(), name='update'),
     url(r'^user/(?P<pk>\d+)/update/$', UserUpdate.as_view(), name='update'),
-   
+   url(r'^staff/(?P<pk>\d+)/delete/$', StaffDelete.as_view(), name='delete'), 
+
 ]
 # models genric views templates and others
 customer list
@@ -200,6 +201,7 @@ staff details and create
 <p>Telephone: {{staff.telephone}}</p>
 
  <a href="update" class="btn btn-primary btn-lg active" role="button">Update</a>
+ <a href="delete" class="btn btn-primary btn-lg active" role="button">Delete</a>
 {% endblock %}
 
 
@@ -214,6 +216,15 @@ staff details and create
 </form>
 
    {% endblock %}
+   
+   staff delete
+   
+   <form action="" method="post">
+     {% csrf_token %}
+     <input type="submit">
+ </form>
+
+   
    
 #views
 from django.shortcuts import get_object_or_404, render
@@ -248,6 +259,11 @@ class StaffUpdate(UpdateView):
          return reverse('lipsy:staff_detail', kwargs={
              'pk': self.object.pk,
          })
+         
+class StaffDelete(DeleteView):
+    model = Staff
+    success_url = '/'
+    
     
 class CustomerListing(ListView):
      model = Customer
