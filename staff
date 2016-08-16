@@ -1,0 +1,155 @@
+#BASE OF THE STAFF
+
+{% load staticfiles %}
+<style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #D5D8DC;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+  </style>
+<div class="container-fluid">
+<div class="row content">
+<div class ="col-sm-3 sidenav">
+<h2> 
+<a style ="color : #fc1b04" href = "/staff">STAFF</a></h2>
+
+<li><a href="create" class="btn btn-default navbar-btn" role="button">CREATE</a></li>
+<br>
+     <div class="input-group">
+       <form method="get" action="search/">
+          
+<label for="id_q">Search:</label>
+           <input type="text" name="q" id="id_q"/>
+           <input type="submit" value="Submit"/>
+        </form>
+       </span>
+      </div>
+    </div>
+<hr>
+
+#STAFF HOME(STAFF LIST)
+{% extends "lipsy/base.html" %}
+{% load staticfiles %}
+{% block content %}
+{% include "lipsy/staff_base.html" %}
+
+{% for staff in staff_list %}
+ <li><a style = " font-size : 20px"  href = "{{staff.id}}" >{{staff.name}}</a></li>
+</ul>
+<br><br>
+{% endfor %}
+<hr>
+{% endblock %}
+
+#STAFF DETAILS(STAFF DETAIL)
+
+{% extends "lipsy/base.html" %}
+  {%load staticfiles %}
+{% block content %}
+{% include "lipsy/staff_base.html" %}
+
+<p style="font-size: 20px" >Name: {{ staff.name}}</p> 
+<p style="font-size: 20px">Telephone: {{staff.telephone}}</p>
+
+<button type="button">
+    <a href="update" class="btn btn-default navbar-btn" role="button">UPDATE</a>
+</button>
+ 
+<button type="button">
+<a href="delete" class="btn btn-default navbar-btn" role="button">DELETE</a>
+</button>
+{% endblock %}
+
+#STAFF CREATE(NEW STAFF)
+
+
+{% extends "lipsy/base.html" %}
+ {% block content %}
+ {% include "lipsy/staff_base.html" %}      
+        
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save" />
+</form>
+
+   {% endblock %}
+   
+
+#STAFF DELETE
+
+
+{% extends "lipsy/base.html" %}
+ {% block content %}
+ {% include "lipsy/staff_base.html" %}      
+        
+<form action="" method="post">
+     {% csrf_token %}
+     <input type="submit">
+ </form>
+{% endblock %}
+
+
+#STAFF VIEWS
+
+from .models import Staff
+from django.core.urlresolvers import reverse
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+
+class StaffListing(ListView):
+     model = Staff
+class StaffCreate(CreateView):
+    model = Staff
+    success_url ='/'
+    fields= ['name','telephone']
+class StaffDetail(DetailView):
+    model = Staff
+class StaffUpdate(UpdateView):
+    model = Staff
+    fields= ['name','telephone']
+    def get_success_url(self):
+         return reverse('lipsy:staff_detail', kwargs={
+             'pk': self.object.pk,
+         })
+class StaffDelete(DeleteView):
+    model = Staff
+    success_url = '/'
+
+#STAFF URLS
+
+from django.conf.urls import include, url
+from django.views.generic import ListView, DetailView
+from .models import Staff
+from . import views
+from .views import StaffListing, StaffDetail, StaffUpdate, StaffCreate, StaffDelete
+
+urlpatterns = [
+    
+   url(r'^$', views.home),
+   url(r'^staff/$', StaffListing.as_view(), name ='staff_list'),
+    url(r'^staff/(?P<pk>\d+)/$',StaffDetail.as_view(), name ='staff_detail'),
+    url(r'^staff/create/$',StaffCreate.as_view(), name ='create'),
+      url(r'^staff/(?P<pk>\d+)/update/$', StaffUpdate.as_view(), name='update'),
+     url(r'^staff/(?P<pk>\d+)/delete/$', StaffDelete.as_view(), name='delete'), 
+    url(r'^staff/search/$', views.search),]
+
