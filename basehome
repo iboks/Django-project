@@ -1,0 +1,50 @@
+#app base
+{%load staticfiles%}
+<html>
+    <head>
+    <title>SILSON</title>
+        <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1">       
+        
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    
+        
+    </head>
+  <body class="body" style ="background-color:#f8f8f8">
+    <div class="jumbotron" style ="color: #aeb6bf">       
+            <h1 class ="header" style="color :#17202a">SILSON LTD</h1>                 
+              <p ><a style ="color : #fc1b04"  href = "/" >HOME</a></p> 
+          </div>
+            <div class="container">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </body>
+</html>
+
+
+ 
+
+#app home
+
+{% extends "lipsy/base.html" %}
+ {%load staticfiles %}
+
+{% block content %}
+
+
+<div class ="list-group">
+    
+       <a style="font-size: 20px" href = "/customer" class="list-group-item" >CUSTOMER</a>
+
+<a style="font-size: 20px" href = "/staff"  class="list-group-item" >STAFF</a>
+    <a style="font-size: 20px" href = "/association"  class="list-group-item" >ASSOCIATION</a>
+   <a style="font-size: 20px" href = "/user"  class="list-group-item" >USER</a>
+<a style="font-size: 20px" href = "/jobs"  class="list-group-item" >JOBS</a>
+   <a style="font-size: 20px" href = "/stock"  class="list-group-item" >STOCK</a>
+
+    </div>
+ 
+{% endblock %}
+
