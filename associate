@@ -1,0 +1,135 @@
+# assoc base
+
+{% load staticfiles %}
+<style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #D5D8DC;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+  </style>
+<div class="container-fluid">
+<div class="row content">
+<div class ="col-sm-3 sidenav">
+<h2> 
+<a href = "/association">ASSOCIATION</a></h2>
+
+<li><a href="create" class="btn btn-default navbar-btn" role="button">CREATE</a></li>
+<br>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search Association..">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+<hr>
+
+#assoc list
+
+{% extends "lipsy/base.html" %}
+{% load static %}
+
+
+{% block content %}
+{% include "lipsy/association_base.html" %}
+
+{% for association in association_list %}
+ <li><a style="font-size: 20px"  href = "{{association.id}}" >{{association.name}}</a></li>
+</ul>
+<br><br>
+{% endfor %}
+<hr>
+{% endblock %}
+
+# assoc details
+
+{% extends "lipsy/base.html" %}
+  {%load staticfiles %}
+{% block content %}
+{% include "lipsy/association_base.html" %}
+
+<p style="font-size: 20px" >Name: {{ association.name}}</p> 
+<p style="font-size: 20px" >Associate: {{ association.associate}}</p>
+<p style="font-size: 20px" >Role: {{ association.role}}</p>
+<p style="font-size: 20px" >Start: {{ association.start}}</p>
+<p style="font-size: 20px" >End: {{ association.end}}</p>
+<p style="font-size: 20px" >Comment: {{ association.comments}}</p>
+<button type="button">
+    <a style="font-size: 20px"  href="update" class="btn btn-default navbar-btn" role="button">Update</a>
+</button>
+{% endblock %}
+
+#assoc create(new)
+
+{% extends "lipsy/base.html" %}
+ {% block content %}
+  {% include "lipsy/association_base.html" %}     
+        
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save" />
+</form>
+
+   {% endblock %}
+   
+#assocaite views
+
+class AssociationListing(ListView):
+     model = Association
+class AssociationCreate(CreateView):
+    model = Association
+    success_url ='/'
+    fields= ['name','associate','role','start','end','comments']
+class AssociationDetail(DetailView):
+    model = Association
+    
+class AssociationUpdate(UpdateView):
+    model = Association
+    fields= ['name','associate','role','start','end','comments']
+    def get_success_url(self):
+         return reverse('lipsy:association_detail', kwargs={
+             'pk': self.object.pk,
+         })
+         
+         
+#associate url
+
+
+from django.conf.urls import include, url
+from django.views.generic import ListView, DetailView
+from .models import Association
+from . import views
+from .views import AssociationListing, AssociationDetail, AssociationUpdate, AssociationCreate
+app_name = 'lipsy'
+
+urlpatterns = [
+     url(r'^$', views.home),
+    url(r'^association/$', AssociationListing.as_view(), name ='association_list'),
+    url(r'^time/$' , views.current_datetime, name='current_datetime'),
+     url(r'^association/(?P<pk>\d+)/$',AssociationDetail.as_view(), name ='Association_detail'),
+     url(r'^association/create/$',AssociationCreate.as_view(), name ='create'),
+     url(r'^association/(?P<pk>\d+)/update/$', AssociationUpdate.as_view(), name='update'),
+  
