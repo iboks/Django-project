@@ -1,0 +1,155 @@
+#Customer Base
+
+{% load staticfiles %}
+<style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #D5D8DC;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+  </style>
+
+<div class="container-fluid">
+<div class="row content">
+<div class ="col-sm-3 sidenav">
+<h2> 
+<a href = "/customer">CUSTOMER</a></h2>
+
+<li><a href="create" class="btn btn-default navbar-btn" role="button">CREATE</a></li>
+<br>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search Customer..">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+<hr>
+
+#Customer LIst
+
+{% extends "lipsy/base.html" %}
+{% load staticfiles %}
+{% block content %}
+{% include "lipsy/customer_base.html" %}
+
+
+{% for customer in customer_list %}
+ <li><a style = " font-size : 20px"  href = "{{customer.account_ID}}" >{{customer.full_Name}}</a></li>
+</ul>
+<br><br>
+{% endfor %}
+<hr>
+{% endblock %}
+
+#customer Detail
+
+
+{% extends "lipsy/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+{% include "lipsy/customer_base.html" %}
+<h4 style = " font-size : 25px" >Customer Information</h4>
+<p style = " font-size : 20px" >Account ID :{{customer.account_ID}}</p>
+<p style = " font-size : 20px" >Name:{{customer.full_Name}}</p>
+<p style = " font-size : 20px" >Acronym :{{customer.acronym}}</p>
+<h4 style = " font-size : 25px" >Contact Detail</h4>
+<p style = " font-size : 20px" >Address:{{customer.address}}</p>
+<p style = " font-size : 20px" >Country :{{customer.country}}</p>
+<p style = " font-size : 20px" >State :{{customer.state}}</p>
+<p style = " font-size : 20px" >US State :{{customer.us_state}}</p>
+<p style = " font-size : 20px" >Telephone :{{customer.telephone}}</p>
+<p style = " font-size : 20px" >Website :{{customer.website}}</p>
+<h4 style = " font-size : 25px" >Additional Information</h4>
+<p style = " font-size : 20px" >VAT :{{customer.v_A_T}}</p>
+<p style = " font-size : 20px" >Customer Type :{{customer.customer_type}}</p>
+<p style = " font-size : 20px" >Date Added :{{customer.date_added}}</p>
+<p style = " font-size : 20px" >Status :{{customer.status}}</p>
+<p style = " font-size : 20px" >Added By :{{customer.added_by}}</p>
+
+<button type="button">
+    <a style = " font-size : 20px" href="update" class="btn btn-default navbar-btn" role="button">Update</a>
+</button>
+
+{% endblock %}
+
+#customer Create(New)
+
+
+{% extends "lipsy/base.html" %}
+ {% block content %}
+ {% include "lipsy/customer_base.html" %}      
+        
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save" />
+</form>
+
+   {% endblock %}
+   
+
+#Customer views
+
+from .models import Customer
+from django.core.urlresolvers import reverse
+from django.views.generic import CreateView, DeleteView, DetailView, ListView,UpdateView
+class CustomerDetail(DetailView):
+    model = Customer
+   
+class CustomerListing(ListView):
+     model = Customer
+
+class CustomerCreate(CreateView):
+    model = Customer
+    success_url ='/'
+    fields= ['account_ID','full_Name','acronym','address','country','state','us_state','telephone','website', 'v_A_T','customer_type','date_added','status','added_by']
+
+class CustomerUpdate(UpdateView):
+    model = Customer
+    fields= ['account_ID','full_Name','acronym','address','country','state','us_state','telephone','website', 'v_A_T','customer_type','date_added','status','added_by']
+    def get_success_url(self):
+         return reverse('lipsy:customer_detail', kwargs={
+             'pk': self.object.pk,
+         })
+         
+         
+#Customer Url
+  
+
+from django.conf.urls import include, url
+from django.views.generic import ListView, DetailView
+from .models import Customer
+from . import views
+from .views import CustomerListing, CustomerDetail, CustomerCreate, CustomerUpdate
+
+urlpatterns = [
+    
+   url(r'^$', views.home),
+   url(r'^customer/$', CustomerListing.as_view(), name ='customer_list')
+    url(r'^customer/create/$',CustomerCreate.as_view(), name ='create'),
+    url(r'^customer/(?P<pk>\w+)/$',CustomerDetail.as_view(), name ='customer_detail'),
+    url(r'^customer/(?P<pk>\w+)/update/$', CustomerUpdate.as_view(), name='update'),
+ ]
