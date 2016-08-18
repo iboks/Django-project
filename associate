@@ -35,12 +35,13 @@
 
 <li><a href="create" class="btn btn-default navbar-btn" role="button">CREATE</a></li>
 <br>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search Association..">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">
-            <span class="glyphicon glyphicon-search"></span>
-          </button>
+       <div class="input-group">
+       <form method="get" action="search/">
+          
+<label for="id_q">Search:</label>
+           <input type="text" name="q" id="id_q"/>
+           <input type="submit" value="Submit"/>
+        </form>
         </span>
       </div>
     </div>
