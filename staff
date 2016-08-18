@@ -109,12 +109,33 @@
  </form>
 {% endblock %}
 
+#STAFF SEARCH
+{% extends "lipsy/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+{% include "lipsy/staff_base.html" %}
+
+<h1>Searched for: {{ query }}</h1>
+ 
+{% for obj in filter %}
+<li><a style = " font-size : 20px"  href = "/staff/{{obj.id}}" >{{obj.name}}</a></li>
+
+</ul>  {% endfor %}
+ 
+{% endblock %}
+
+
+
 
 #STAFF VIEWS
 
 from .models import Staff
 from django.core.urlresolvers import reverse
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+from .views import StaffListing, StaffDetail, StaffUpdate, StaffCreate, StaffDelete, StaffFilter
+from django_filters.views import FilterView
+
 
 class StaffListing(ListView):
      model = Staff
@@ -134,6 +155,27 @@ class StaffUpdate(UpdateView):
 class StaffDelete(DeleteView):
     model = Staff
     success_url = '/'
+#THIS FILTERS AND SEARCHS THE STAFF
+
+class StaffFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(lookup_expr='icontains')
+
+    class Meta:
+        model = Staff
+        fields = ['name']
+
+def staff_list(request):
+    query = request.GET['q']
+    f = StaffFilter(request.GET, 
+      queryset=Staff.objects.all().filter(name__icontains= query) )
+    return render(request, 'lipsy/staff_search.html',{'filter' :f})
+
+
+#THIS REDIRECTS THE SEARCH RESULT
+
+def staff_search(request,staff_id):
+   return render_to_response('staff_detail.html',{'staff':Staff.objects.get(pk=staff_id)}) 
+
 
 #STAFF URLS
 
@@ -151,5 +193,5 @@ urlpatterns = [
     url(r'^staff/create/$',StaffCreate.as_view(), name ='create'),
       url(r'^staff/(?P<pk>\d+)/update/$', StaffUpdate.as_view(), name='update'),
      url(r'^staff/(?P<pk>\d+)/delete/$', StaffDelete.as_view(), name='delete'), 
-    url(r'^staff/search/$', views.search),]
+    url(r'^staff/search/(?P<pk>\d+)/$',views.staff_search),]
 
