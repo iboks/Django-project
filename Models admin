@@ -39,6 +39,10 @@ class Customer(models.Model):
         User,
         through='Association',
         through_fields=('associate', 'name'),)
+        #to make the user input uppercase
+         def save(self, force_insert=False, force_update=False):
+        self.account_ID =self.account_ID.upper()
+        super(Customer, self).save(force_insert, force_update)
     def __str__(self):
         return self.account_ID
 
@@ -60,6 +64,13 @@ from .models import Staff
 from .models import Association
 from .models import Customer
 from .models import User
+from django import forms
+class CustomerAdminForm(forms.ModelForm):
+    class Meta:
+        model= Customer
+        fields = ["account_ID"]
+    def clean_name(self):
+        return self.clean_name["account_ID"].upper()
 
 
 
