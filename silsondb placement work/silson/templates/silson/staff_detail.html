@@ -1,0 +1,67 @@
+
+{% extends "silson/base.html" %}
+  {%load staticfiles %}
+
+{% block content %}
+
+<div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; <a href="/staff/">Staff</a>
+&rsaquo;{{object.name}}
+</div>
+
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar">
+    <h2> <a href = "/staff">Staff</a></h2>
+    <ul class="nav navbar-nav navbar-right">
+        <ul class="object-tools">    
+    <li> <a href="/staff/create"  class="addlink">Create Staff </a></li>  
+        <div class="input-group"> 
+       
+
+      </div></ul>
+    </ul>
+</div>
+   </div>
+</nav>
+ 
+<div>
+<fieldset class="module aligned ">
+    
+    
+    
+        <div class="form-row field-name">
+              <h2>Staff Detail</h2> 
+            
+                <div>
+                    
+ <p style="font-size: 20px" >Name: {{staff.name}} </p> 
+ <p style="font-size: 20px" >Telephone: {{staff.telephone}} </p> 
+
+                </div>
+       
+</div>
+            
+       
+    
+</fieldset>
+
+<div class="submit-row">
+ <a href="update" class="btn btn-info" role="button"> UPDATE</a>
+
+   
+    <a href="delete" class="btn btn-danger" role="button">DELETE</a>
+
+
+</div>
+
+</div>
+
+
+
+
+{% endblock %}
+
+
+

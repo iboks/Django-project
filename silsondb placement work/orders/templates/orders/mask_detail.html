@@ -1,0 +1,59 @@
+{% extends "silson/base.html" %}
+  {%load staticfiles %}
+{% block content %}
+
+<div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; <a href="/jobs/">Jobs</a>
+&rsaquo; <a href="/jobs/mask/">Masks</a>
+&rsaquo; {{object.reference}}
+</div>
+
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar">
+    <h2> <a href = "/jobs/mask">Mask</a></h2>
+    <ul class="nav navbar-nav navbar-right">
+        <ul class="object-tools">    
+    <li> <a href="/jobs/mask/create"  class="addlink">Create Mask </a></li>  
+        <div class="input-group"> 
+       
+
+      </div></ul>
+    </ul>
+</div>
+   </div>
+</nav>
+
+
+<div>
+<fieldset class="module aligned ">
+    
+    
+    
+        <div class="form-row field-name">
+            
+            <h2>Mask Detail</h2>  
+                <div>
+ 
+                
+<p style="font-size: 20px">Reference: {{ mask.reference}}</p>
+<p style="font-size: 20px">Membrane size: {{ mask.membrane_size}}</p>
+<p style="font-size: 20px">Wafer diameter: {{ mask.wafer_dia}}</p>
+<p style="font-size: 20px">Wafer thickness: {{ mask.wafer_thickness}}</p>
+<p style="font-size: 20px">Number available: {{ mask.number_available}}</p>
+<p style="font-size: 20px">Frame Size: {{ mask.frame_size}}</p>
+<p style="font-size: 20px">Comment: {{ mask.comment}}</p>
+</div>
+            
+        </div>
+    
+</fieldset>
+
+<div class="submit-row">
+ <a href="update" class="btn btn-info" role="button"> UPDATE</a>
+</div>
+</div>
+
+
+{% endblock %}

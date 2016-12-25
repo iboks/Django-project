@@ -1,0 +1,53 @@
+{% extends "silson/base.html" %}
+ {% block content %}
+   <div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; <a href="/jobs/">Jobs</a>
+&rsaquo; <a href="/jobs/prs/">Process Record</a>
+&rsaquo; Create Process Record Sheet
+</div>
+
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar">
+    <h2> <a href = "/jobs/prs"> Process Record</a></h2>
+    <ul class="nav navbar-nav navbar-right">
+        <ul class="object-tools">    
+    <li> <a href="/jobs/prs/create"  class="addlink">Create Process Record Sheet </a></li>  
+        <div class="input-group"> 
+       
+
+      </div></ul>
+    </ul>
+</div>
+   </div>
+</nav>
+<div>
+<form action="" method="post">
+<input type='hidden' name='csrfmiddlewaretoken' value='tJ1rwEyvLdbSiPY1pOBK0DZD4UiAzhx3' />
+ <h2>New Process Record Sheet</h2>  
+
+<button> <a class="related-widget-wrapper-link change-related" id="add_id_added_by"
+            href="/jobs/mask/create/?_to_field=id&amp;_popup=1"
+            title="Add another mask"role="button">New Mask</a></button>
+<button> <a class="related-widget-wrapper-link change-related" id="add_id_added_by"
+            href="/jobs/wafer/create/?_to_field=id&amp;_popup=1"
+            title="Add another wafer"role="button">New Wafer</a></button>
+<button> <a class="related-widget-wrapper-link change-related" id="add_id_added_by"
+            href="/customer/create/?_to_field=id&amp;_popup=1"
+            title="Add another customer"role="button">New Customer</a></button>
+<fieldset class="module aligned ">
+    {% csrf_token %}
+    {{ form.as_p }}
+  
+</div>   
+</fieldset>
+
+<div class="submit-row">
+<input type="submit" value="Save" class="default" name="_save" />
+<input type="submit" value="Save and add another" name="_addanother" />
+<input type="submit" value="Save and continue editing" name="_continue" />
+</div>
+
+</form></div>
+   {% endblock %}

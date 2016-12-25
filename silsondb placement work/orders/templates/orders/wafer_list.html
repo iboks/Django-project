@@ -1,0 +1,74 @@
+{% extends "silson/base.html" %}
+
+{% load staticfiles %}
+{% block content %}
+
+<div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; <a href="/jobs/">Jobs</a>
+&rsaquo; Wafer
+</div>
+
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar">
+    <h3> Select Wafer to View</h3>
+    <ul class="nav navbar-nav navbar-right">
+        <ul class="object-tools">    
+    <li> <a href="/jobs/wafer/create"  class="addlink">Create Wafer </a></li>  
+        <div class="input-group"> 
+       <form method="get" action="search/">          
+    <label for="id_q">Search:</label>
+           <input type="text" name="q" id="id_q"/>
+           <input type="submit" value="Search"/>
+    </form>
+
+      </div></ul>
+    </ul>
+</div>
+   </div>
+</nav>
+<div class="results">
+<table class="table table-striped">
+<thead>
+<tr>
+<th scope="col"  class="sortable column-reference"> 
+   <div class="text">Reference</div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-coating">
+   <div class="text">Coating</div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-box-no">
+   <div class="text">Box No</div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-no_of_wafers">
+   <div class="text">No of Wafers</div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-comment">
+   <div class="text">Comment</div>
+   <div class="clear"></div>
+</th>
+</tr>
+</thead>
+<tbody>
+    {% for wafer in wafer_list %}
+    <tr>
+        <td><a style = " font-size : 15px"  href = "{{wafer.id}}" >{{wafer.reference}}</a></td>
+        <td style="font-size: 15px"  >{{wafer.coating}}</td>
+        <td style="font-size: 15px"  >{{wafer.box_no}}</td>
+          <td style="font-size: 15px"  >{{wafer.no_of_wafers}}</td>
+      <td style="font-size: 15px"  >{{wafer.comment}}</td>
+    </tr>
+    {% endfor %}
+
+</tbody>
+</table>
+</div>
+{% endblock %}
+
+
+

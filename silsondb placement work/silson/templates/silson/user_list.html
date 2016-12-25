@@ -1,0 +1,53 @@
+{% extends "silson/base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; People
+</div>
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar">
+    <h3> Select People to View</h3>
+    <ul class="nav navbar-nav navbar-right">
+        <ul class="object-tools">    
+    <li> <a href="/user/create"  class="addlink">Create Person </a></li>  
+        <div class="input-group"> 
+       <form method="get" action="search/">          
+    <label for="id_q">Search:</label>
+           <input type="text" name="q" id="id_q"/>
+           <input type="submit" value="Search"/>
+    </form>
+
+      </div></ul>
+    </ul>
+</div>
+   </div>
+</nav>
+
+<div class="results">
+<table class="table table-striped">
+<thead>
+<tr>
+<th scope="col"  class="sortable column-name"> 
+   <div class="text">Name</div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-address">
+   <div class="text">Address</div>
+   <div class="clear"></div>
+</th>
+</tr>
+</thead>
+<tbody>
+{% for user in user_list %}
+<tr  >
+ <td><a style="font-size: 15px"  href = "{{user.id}}" >{{user.name}}</a></td>
+    <td style="font-size: 15px"  >{{user.address}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}
+

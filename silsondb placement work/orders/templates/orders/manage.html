@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta charset="utf-8" />
+        <title>TEST</title>
+    </head>
+	<body>
+
+     {% load crispy_forms_tags %} 
+     <form method="post" action="" class="">
+        
+        {% crispy form   %}
+        {% crispy formset formset.form.helper %}
+
+        <input class="submit" type="submit" value="Submit data">
+        
+    </form>
+    
+    </body>
+</html>

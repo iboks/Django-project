@@ -1,0 +1,68 @@
+{% extends "silson/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; <a href="/jobs/">Jobs</a>
+&rsaquo; Mask
+</div>
+
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar">
+    <h3> Select Mask to View</h3>
+    <ul class="nav navbar-nav navbar-right">
+        <ul class="object-tools">    
+    <li> <a href="/jobs/mask/create"  class="addlink">Create Mask </a></li>  
+        <div class="input-group"> 
+       <form method="get" action="search/">          
+    <label for="id_q">Search:</label>
+           <input type="text" name="q" id="id_q"/>
+           <input type="submit" value="Search"/>
+    </form>
+
+      </div></ul>
+    </ul>
+</div>
+   </div>
+</nav>
+
+<div class="results">
+<table class="table table-striped">
+<thead>
+<tr>
+
+<th scope="col"  class="sortable column-reference">
+   <div class="text">Reference</div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-membrane_size">  
+   <div class="text">Membrane Size</div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-number_available">  
+   <div class="text">Number Available</div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-comment">  
+   <div class="text">Comment</div>
+   <div class="clear"></div>
+</th>
+</tr>
+</thead>
+<tbody>
+{% for mask in mask_list %}
+<tr>
+ <td><a style="font-size: 15px"  href = "{{mask.id}}" >{{mask.reference}}</a></td>
+    <td style="font-size: 15px">{{mask.membrane_size}}</td>
+    <td style="font-size: 15px" > {{mask.number_available}}</td>
+    <td style="font-size: 15px">{{mask.comment}}</td>
+</tr>
+
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}
+

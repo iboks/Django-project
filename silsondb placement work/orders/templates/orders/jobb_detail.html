@@ -1,0 +1,99 @@
+{% extends "silson/base.html" %}
+  {%load staticfiles %}
+{% block content %}
+
+<div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; <a href="/jobs/">Jobs</a>
+&rsaquo; <a href="/jobs/job/">Job</a>
+&rsaquo; {{object.job_No}}
+</div>
+
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar">
+    <h2> <a href = "/jobs/job">Job</a></h2>
+    <ul class="nav navbar-nav navbar-right">
+        <ul class="object-tools">    
+    <li> <a href="/jobs/job/create"  class="addlink">Create Job </a></li>  
+        <div class="input-group"> 
+       
+
+      </div></ul>
+    </ul>
+</div>
+   </div>
+</nav>
+
+
+<div>
+<fieldset class="module aligned ">
+    
+    
+    
+        <div class="form-row field-name">
+            
+            <h2>Job Detail</h2>  
+                <div>
+ 
+               
+<p style="font-size: 20px">Job No: {{ jobb.job.No}}</p>
+<p style="font-size: 20px"> Customer: {{ jobb.customer}}</p>
+<h4 style = " font-size : 25px" >Customer Information</h4> 
+<p style="font-size: 20px">Product Order No: {{ jobb.p_order_no}}</p>
+<p style="font-size: 20px">Product Order Date: {{jobb.p_order_date}}</p>
+<p style="font-size: 20px"> Product Order Acknowledged:{{jobb.po_acknowledged}}</p>
+<p style="font-size: 20px">Ship By: {{jobb.ship_by}}</p>
+<p style="font-size: 20px">Purchase Contact: {{jobb.purchase_contact}}</p>
+<p style="font-size: 20px">End User: {{jobb.end_user}}</p>
+<p style="font-size: 20px">Date Recieved: {{jobb.date_received}}</p>
+<p style="font-size: 20px">Dispatch Date: {{jobb.disp_date}}</p>
+<p style="font-size: 20px">Dispatch Advised: {{jobb.disp_advised}}</p>
+<p style="font-size: 20px">POD Date: {{jobb.POD_Date}}</p>
+<p style="font-size: 20px">Invoice No: {{ jobb.invoice_No}}</p>
+<p style="font-size: 20px">Invoice Date: {{jobb.invoice_Date}}</p>
+<p style="font-size: 20px">Payment Received: {{jobb.payment_received}}</p>
+<p style="font-size: 20px">Comments: {{jobb.comments}}</p>
+
+<table class="table table-striped">
+{% for process_record in object.process_record_set.all %}
+
+<p><a style="font-size: 15px" href="/jobs/prs/{{process_record.id}}">PRSheet No:{{ process_record.sheet_No }}</a></p>   
+<p style="font-size: 15px" >Job Date: {{process_record.job_Date}} </p>  
+<p style="font-size: 15px" >Number Required: {{process_record.number_required}} </p>  
+<p style="font-size: 15px" >Mask Ref: {{process_record.mask_ref}} </p>  
+<p style="font-size: 15px" >Wafer Ref: {{process_record.wafer_ref}} </p>  
+<p style="font-size: 15px" >Membrame Thickness: {{process_record.membrame_thickness}} </p>  
+<p style="font-size: 15px" >Frame Size: {{process_record.frame_size}} </p>  
+<p style="font-size: 15px" >Frame added to stock: {{process_record.frame_added_to_stock}} </p>  
+<p style="font-size: 15px" >Comment: {{process_record.comment}} </p>
+
+
+
+    {% endfor %}
+</table>
+</div>
+            
+        </div>
+    
+</fieldset>
+
+<div class="submit-row">
+ <a href="update" class="btn btn-info" role="button"> UPDATE</a>
+</div>
+</div>
+
+
+{% endblock %}
+<h4 style = " font-size : 25px" >Items Required</h4> 
+<p style="font-size: 20px">Number required: {{job_.no_required}}</p>
+<p style="font-size: 20px">Frame Size: {{job_.frame_size}}</p>
+<p style="font-size: 20px">Frame Thickness: {{job_.frame_thickness}}</p>
+<p style="font-size: 20px">Membrane Size: {{job_.membrane_size}}</p>
+<p style="font-size: 20px">Membrane Thickness: {{job_.membrane_thickness}}</p>
+<p style="font-size: 20px">Product Codes: {{job_.product_codes}}</p>
+<p style="font-size: 20px">Stock No: {{job_.stock_no}}</p>
+<p style="font-size: 20px">Process Record Sheet: {{job_.prs}}</p>
+<p style="font-size: 20px">Used: {{job_.used}}</p>
+<p style="font-size: 20px">Quality: {{job_.quality}}</p>
+<p style="font-size: 20px">Product Code Updated: {{job_.product_code_updated}}</p>

@@ -1,0 +1,41 @@
+{% extends "silson/base.html" %}
+ {% block content %}
+  <div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; <a href="/jobs/">Jobs</a>
+&rsaquo; <a href="/jobs/mask/">Masks</a>
+&rsaquo; Create Mask
+</div>
+
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar">
+    <h2> <a href = "/jobs/mask">Mask</a></h2>
+    <ul class="nav navbar-nav navbar-right">
+        <ul class="object-tools">    
+    <li> <a href="/jobs/mask/create"  class="addlink">Create Mask </a></li>  
+        <div class="input-group"> 
+       
+      </div></ul>
+    </ul>
+</div>
+   </div>
+</nav>
+<div>
+<form action="" method="post">
+<input type='hidden' name='csrfmiddlewaretoken' value='tJ1rwEyvLdbSiPY1pOBK0DZD4UiAzhx3' />
+ <h2>Add Mask</h2>  
+<fieldset class="module aligned ">
+    {% csrf_token %}
+    {{ form.as_p }}  
+</fieldset>
+<div class="submit-row">
+<input type="submit" value="Save" class="default" name="_save" />
+<input type="submit" value="Save and add another" name="_addanother" />
+<input type="submit" value="Save and continue editing" name="_continue" />
+</div>
+
+
+</form></div>
+
+   {% endblock %}

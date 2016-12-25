@@ -1,0 +1,64 @@
+{% extends "silson/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; <a href="/customer/">Customer</a>
+&rsaquo; {{object.account_ID}}
+</div>
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar">
+    <h2> <a href = "/customer">Customer</a></h2>
+    <ul class="nav navbar-nav navbar-right">
+        <ul class="object-tools">    
+    <li> <a href="/customer/create"  class="addlink">Create Customer </a></li>  
+        <div class="input-group"> 
+       
+
+      </div></ul>
+    </ul>
+</div>
+   </div>
+</nav>
+
+<div>
+<fieldset class="module aligned ">
+    
+    
+    
+        <div class="form-row field-name">
+            
+            
+                <div>
+                    
+<h2>Customer Information</h2>
+<p style = " font-size : 20px" >Account ID :{{customer.account_ID}}</p>
+<p style = " font-size : 20px" >Name:{{customer.full_Name}}</p>
+<p style = " font-size : 20px" >Acronym :{{customer.acronym}}</p>
+<h2 >Contact Detail</h2>
+<p style = " font-size : 20px" >Address:{{customer.address}}</p>
+<p style = " font-size : 20px" >Country :{{customer.country}}</p>
+<p style = " font-size : 20px" >State :{{customer.state}}</p>
+<p style = " font-size : 20px" >US State :{{customer.us_state}}</p>
+<p style = " font-size : 20px" >Telephone :{{customer.telephone}}</p>
+<p style = " font-size : 20px" >Website :{{customer.website}}</p>
+<h2>Additional Information</h2>
+<p style = " font-size : 20px" >VAT :{{customer.VAT}}</p>
+<p style = " font-size : 20px" >Customer Type :{{customer.customer_type}}</p>
+<p style = " font-size : 20px" >Date Added :{{customer.date_added}}</p>
+<p style = " font-size : 20px" >Status :{{customer.status}}</p>
+<p style = " font-size : 20px" >Added By :{{customer.added_by}}</p>
+</div>
+            
+        </div>
+    
+</fieldset>
+
+<div class="submit-row">
+ <a href="update" class="btn btn-info" role="button"> UPDATE</a>
+</div>
+</div>
+
+{% endblock %}

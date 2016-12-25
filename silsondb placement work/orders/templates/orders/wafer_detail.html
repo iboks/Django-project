@@ -1,0 +1,65 @@
+
+{% extends "silson/base.html" %}
+  {%load staticfiles %}
+
+{% block content %}
+<div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; <a href="/jobs/">Jobs</a>
+&rsaquo; <a href="/jobs/wafer/">Wafer</a>
+&rsaquo; {{object.reference}}
+</div>
+
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar">
+    <h2> <a href = "/jobs/wafer">Wafer</a></h2>
+    <ul class="nav navbar-nav navbar-right">
+        <ul class="object-tools">    
+    <li> <a href="/jobs/wafer/create"  class="addlink">Create Wafer </a></li>  
+        <div class="input-group"> 
+      
+
+      </div></ul>
+    </ul>
+</div>
+   </div>
+</nav>
+
+<div>
+<fieldset class="module aligned ">
+    
+    
+    
+        <div class="form-row field-name">
+              <h2>Wafer Detail</h2> 
+            
+                <div>
+                    
+<p style="font-size: 20px" >Reference: {{ wafer.reference}}</p> 
+<p style="font-size: 20px">Coating {{wafer.coating}}</p>
+<p style="font-size: 20px" >Coating Thickness: {{ wafer.coating_thickness}}</p> 
+<p style="font-size: 20px" >Silicon Date: {{ wafer.silicon_date}}</p> 
+<p style="font-size: 20px" >Diameter: {{ wafer.diameter}}</p> 
+<p style="font-size: 20px" >Box No: {{ wafer.box_no}}</p> 
+<p style="font-size: 20px" >No of wafers: {{ wafer.no_of_wafers}}</p> 
+<p style="font-size: 20px" >Stress: {{ wafer.stress}}</p> 
+<p style="font-size: 20px" >Polish: {{ wafer.polish}}</p> 
+<p style="font-size: 20px" >Membrane Thickness: {{ wafer.membrane_thickness}}</p> 
+<p style="font-size: 20px" >Comment: {{ wafer.comment}}</p> 
+
+</div>
+            
+        </div>
+    
+</fieldset>
+
+<div class="submit-row">
+ <a href="update" class="btn btn-info" role="button"> UPDATE</a>
+</div>
+</div>
+
+{% endblock %}
+
+
+

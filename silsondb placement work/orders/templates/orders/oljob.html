@@ -1,0 +1,49 @@
+{% extends "silson/base.html" %}
+  {%load staticfiles %}
+{% block content %}
+{% block bottom_script %}{{ block.super }}
+    <script type="text/html" id="process_record-template">
+    <div id="process-record-__prefix__">
+        {{ formset.empty_form }}
+    </div>
+    </script>
+    <script>
+    $(function() {
+        $('.add-process-record').click(function(ev){
+            ev.preventDefault();
+            var count = parseInt($('#process_record_id_set-TOTAL_FORMS').attr('value'), 10);
+            var tmplMarkup = $('#process_record-template').html();
+            var compiledTmpl = tmplMarkup.replace(/__prefix__/g, count)
+            console.log(compiledTmpl);
+            $('div.process_record').append(compiledTmpl);
+            $('#process_record_id_set-TOTAL_FORMS').attr('value', count + 1);
+        });
+    });
+    </script>
+{% endblock bottom_script %}
+{% block base_content %}
+<form action="." method="post">
+    {{ formset.management_form }}
+    {% csrf_token %}
+
+    <legend>JOB</legend>
+    <div class="Jobb">
+    {{ form }}
+    </div>
+
+    <legend>
+        <div class="pull-right"><a href="#" class="btn btn-inverse add-process_record"><i class="icon-plus icon-white"></i> Add Process Record</a></div>
+        Process Record Sheet
+    </legend>
+    <div class="process_record form-inline">
+        {% for form in formset %}
+            {{ form }}
+        {% endfor %}
+    </div>
+  <div class="form-actions">
+     <button type="submit" class="btn btn-primary">Save</button>
+   </div>
+ </form>
+
+{% endblock base_content %}
+{% endblock %}

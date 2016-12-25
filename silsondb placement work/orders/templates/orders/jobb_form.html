@@ -1,0 +1,108 @@
+{% extends "silson/base.html" %}
+ {% block content %}
+  <div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; <a href="/jobs/">Jobs</a>
+&rsaquo; <a href="/jobs/job/">Job</a>
+&rsaquo; Create Job
+</div>
+
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar">
+    <h2> <a href = "/jobs/job">Job</a></h2>
+    <ul class="nav navbar-nav navbar-right">
+        <ul class="object-tools">    
+    <li> <a href="/jobs/job/create"  class="addlink">Create Job </a></li>  
+        <div class="input-group"> 
+       
+      </div></ul>
+    </ul>
+</div>
+   </div>
+</nav>
+<div>
+<form action="" method="post">
+<input type='hidden' name='csrfmiddlewaretoken' value='tJ1rwEyvLdbSiPY1pOBK0DZD4UiAzhx3' />
+ <h2>Add Job Sheet</h2>  
+
+<button> <a class="related-widget-wrapper-link change-related" id="add_id_added_by"
+            href="/user/create/?_to_field=id&amp;_popup=1"
+            title="Add another user"role="button">New User</a></button>
+<button> <a class="related-widget-wrapper-link change-related" id="add_id_added_by"
+            href="/customer/create/?_to_field=id&amp;_popup=1"
+            title="Add another customer"role="button">New Customer</a></button>
+<fieldset class="module aligned ">
+    {% csrf_token %}
+    {{ form.as_p }}  
+</fieldset>
+
+<div class="inline-group" id="process_record_set-group">
+  <h2>Process_records</h2>
+<input id="id_process_record_set-TOTAL_FORMS" name="process_record_set-TOTAL_FORMS" type="hidden" value="1" /><input id="id_process_record_set-INITIAL_FORMS" name="process_record_set-INITIAL_FORMS" type="hidden" value="0" /><input id="id_process_record_set-MIN_NUM_FORMS" name="process_record_set-MIN_NUM_FORMS" type="hidden" value="0" /><input id="id_process_record_set-MAX_NUM_FORMS" name="process_record_set-MAX_NUM_FORMS" type="hidden" value="1000" />
+
+<div class="inline-related" id="process_record_set-0">
+  <h3><b>Process_record:</b>&nbsp;<span class="inline_label">#1</span>
+      
+    
+  </h3>
+
+        {% for form in formset %}
+            {{ form }}
+        {% endfor %}
+ <input id="id_process_record_set-__prefix__-id" name="process_record_set-__prefix__-id" type="hidden" />
+  <input id="id_process_record_set-__prefix__-job_No" name="process_record_set-__prefix__-job_No" type="hidden" />
+</div>
+</div>
+
+<script type="text/javascript">
+(function($) {
+  $("#process_record_set-group .inline-related").stackedFormset({
+    prefix: "process_record_set",
+    deleteText: "Remove",
+    addText: "Add another Process_record"
+  });
+})(django.jQuery);
+</script>
+    </div>
+
+</div>
+<div class="submit-row">
+<input type="submit" value="Save" class="default" name="_save" />
+<input type="submit" value="Save and add another" name="_addanother" />
+<input type="submit" value="Save and continue editing" name="_continue" />
+</div>
+
+
+    <script type="text/javascript">
+        (function($) {
+            $(document).ready(function() {
+                $('.add-another').click(function(e) {
+                    e.preventDefault();
+                    var event = $.Event('django:add-another-related');
+                    $(this).trigger(event);
+                    if (!event.isDefaultPrevented()) {
+                        showAddAnotherPopup(this);
+                    }
+                });
+
+            
+                $('form#jobb_form :input:visible:enabled:first').focus()
+            
+            });
+        })(django.jQuery);
+    </script>
+
+
+
+
+<script type="text/javascript">
+(function($) {
+    var field;
+
+
+})(django.jQuery);
+</script>
+</form></div>
+
+   {% endblock %}

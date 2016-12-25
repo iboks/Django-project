@@ -1,0 +1,36 @@
+{% extends "silson/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; <a href="/customer/">Customer</a>
+&rsaquo; Search Result
+
+</div>
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar">
+    <h2> <a href = "/customer">Customer</a></h2>
+    <ul class="nav navbar-nav navbar-right">
+        <ul class="object-tools">    
+    <li> <a href="/customer/create"  class="addlink">Create Customer </a></li>  
+        <div class="input-group"> 
+      
+
+      </div></ul>
+    </ul>
+</div>
+   </div>
+</nav>
+
+<h1>Result {{ query }}</h1>
+ 
+{% for obj in filter %}
+<li><a style = " font-size : 20px" href = "/customer/{{obj.account_ID}}">{{obj.full_Name}}</a></li>
+
+{% endfor %}
+ 
+{% endblock %}
+
+

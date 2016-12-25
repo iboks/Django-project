@@ -1,0 +1,51 @@
+{% load staticfiles %}
+<style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #D5D8DC;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+  </style>
+<div class="container-fluid">
+<div class="row content">
+<div class ="col-sm-3 sidenav">
+<h2> 
+<a  href = "/staff">STAFF</a></h2>
+
+<li><a href="/staff/create" class="btn btn-default navbar-btn" role="button">CREATE</a></li>
+<br>
+     <div class="input-group">
+       <form method="get" action="search/">
+          
+<label for="id_q">Search:</label>
+           <input type="text" name="q" id="id_q"/>
+           <input type="submit" value="Submit"/>
+
+
+        </form>
+
+        
+       </span>
+      </div>
+    </div>
+ 
+

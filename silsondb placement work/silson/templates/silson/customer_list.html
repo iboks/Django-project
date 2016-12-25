@@ -1,0 +1,75 @@
+{% extends "silson/base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; Customer
+
+</div>
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar">
+    <h3> Select Customer to View</h3>
+    <ul class="nav navbar-nav navbar-right">
+        <ul class="object-tools">    
+    <li> <a href="/customer/create"  class="addlink">Create Customer </a></li>  
+        <div class="input-group"> 
+       <form method="get" action="search/">          
+    <label for="id_q">Search:</label>
+           <input type="text" name="q" id="id_q"/>
+           <input type="submit" value="Search"/>
+    </form>
+
+      </div></ul>
+    </ul>
+</div>
+   </div>
+</nav>
+<div class="results">
+<table class="table table-striped">
+<thead>
+<tr>
+
+<th scope="col"  class="sortable column-account_ID">
+   <div class="text">Account ID</div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-full_Name">  
+   <div class="text">Name</div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-acronym">  
+   <div class="text">Acronym</div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-address">  
+   <div class="text">Address</div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-country">  
+   <div class="text">Country</div>
+   <div class="clear"></div>
+</th>
+<th scope="col"  class="sortable column-VAT">  
+   <div class="text">VAT</div>
+   <div class="clear"></div>
+</th>
+</tr>
+</thead>
+<tbody>
+{% for customer in customer_list %}
+<tr>
+ <td><a style = " font-size : 15px"  href = "{{customer.account_ID}}" >{{customer.full_Name}}</a></td>
+    <td style="font-size: 15px" >{{customer.full_Name}}</a></td>
+    <td style="font-size: 15px" >{{customer.acronym}}</a></td>
+    <td style="font-size: 15px" >{{customer.address}}</a></td>
+    <td style="font-size: 15px" >{{customer.country}}</a></td>
+    <td style="font-size: 15px" >{{customer.VAT}}</a></td>
+</tr>
+
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "silson/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; <a href="/jobs/">Jobs</a>
+&rsaquo; <a href="/jobs/wafer/">Wafer</a>
+&rsaquo; Search Result
+</div>
+
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar">
+    <h2> <a href = "/jobs/wafer">Wafer</a></h2>
+    <ul class="nav navbar-nav navbar-right">
+        <ul class="object-tools">    
+    <li> <a href="/jobs/wafer/create"  class="addlink">Create Wafer </a></li>  
+        <div class="input-group"> 
+       
+      </div></ul>
+    </ul>
+</div>
+   </div>
+</nav>
+
+
+<h1>Searched for: {{ query }}</h1>
+ 
+{% for obj in filter %}
+<li><a style = " font-size : 20px"  href = "/wafer/{{obj.id}}" >{{obj.reference}}</a></li>
+
+</ul>  {% endfor %}
+ 
+{% endblock %}
+
+

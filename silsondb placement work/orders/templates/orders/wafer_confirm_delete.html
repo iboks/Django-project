@@ -1,0 +1,35 @@
+
+{% extends "silson/base.html" %}
+ {% block content %}
+ <div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; <a href="/jobs/">Jobs</a>
+&rsaquo; <a href="/jobs/wafer/">Wafer</a>
+&rsaquo; <pk>
+</div>
+
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar">
+    <h2> <a href = "/jobs/wafer">Wafer</a></h2>
+    <ul class="nav navbar-nav navbar-right">
+        <ul class="object-tools">    
+    <li> <a href="/jobs/wafer/create"  class="addlink">Create Wafer </a></li>  
+        <div class="input-group"> 
+       <form method="get" action="search/">          
+    <label for="id_q">Search:</label>
+           <input type="text" name="q" id="id_q"/>
+           <input type="submit" value="Search"/>
+    </form>
+
+      </div></ul>
+    </ul>
+</div>
+   </div>
+</nav>    
+        
+<form action="" method="post">
+     {% csrf_token %}
+     <input type="submit">
+ </form>
+{% endblock %}

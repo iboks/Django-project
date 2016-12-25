@@ -1,0 +1,62 @@
+{% extends "silson/base.html" %}
+  {%load staticfiles %}
+{% block content %}
+<div class="breadcrumbs">
+<a href="/">Home</a>
+&rsaquo; <a href="/jobs/">Jobs</a>
+&rsaquo; <a href="/jobs/prs/">Process Record</a>
+&rsaquo; {{object.sheet_No}}
+</div>
+
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+    <div class="navbar">
+    <h2> <a href = "/jobs/prs">Process Record</a></h2>
+    <ul class="nav navbar-nav navbar-right">
+        <ul class="object-tools">    
+    <li> <a href="/jobs/prs/create"  class="addlink">Create Process Record Sheet </a></li>  
+        <div class="input-group"> 
+       
+
+      </div></ul>
+    </ul>
+</div>
+   </div>
+</nav>
+
+<div>
+<fieldset class="module aligned ">
+    
+    
+    
+        <div class="form-row field-name">
+              <h2>Process Record Sheet Detail</h2> 
+            
+                <div>
+                    
+<p style="font-size: 20px" >Sheet No: {{process_record.sheet_No}} </p>       
+<p style="font-size: 20px" >Job No: {{process_record.job_No}} </p>  
+<p style="font-size: 20px" >Customer: {{process_record.customer}} </p>  
+<p style="font-size: 20px" >Job Date: {{process_record.job_Date}} </p>  
+<p style="font-size: 20px" >Number Required: {{process_record.number_required}} </p>  
+<p style="font-size: 20px" >Mask Ref: {{process_record.mask_ref}} </p>  
+<p style="font-size: 20px" >Wafer Ref: {{process_record.wafer_ref}} </p>  
+<p style="font-size: 20px" >Membrame Thickness: {{process_record.membrame_thickness}} </p>  
+<p style="font-size: 20px" >Frame Size: {{process_record.frame_size}} </p>  
+<p style="font-size: 20px" >Frame added to stock: {{process_record.frame_added_to_stock}} </p>  
+<p style="font-size: 20px" >Comment: {{process_record.comment}} </p>
+<p style="font-size: 20px" >Apertures: {{process_record.apertures}} </p>
+ </div>
+            
+        </div>
+    
+</fieldset>
+
+<div class="submit-row">
+ <a href="update" class="btn btn-info" role="button"> UPDATE</a>
+</div>
+</div>
+
+
+
+{% endblock %}
